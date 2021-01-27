@@ -1,0 +1,25 @@
+<%- include ("../partials/header") %>
+<div class="row">
+	<div class="col-md-4">
+			<h1><%= user.firstname + " " + user.lastname %></h1>
+		<div class="thumbnail">
+			<img src="<%= user.avatar %>" alt="user profile image">
+			<div class="caption">
+				<a href="mailto:<%= user.email %>"><%= user.email %></a>
+				<p><%= user.desc %></p>
+			</div>
+		</div>
+		<% if(currentuser && user._id.equals(currentuser._id) || currentuser && currentuser.isAdmin){ %>
+			 <a class="btn btn-s btn-warning" href="/users/<%= user._id %>/edit">Edit Your Profile</a>
+		<% } %>	
+	</div>
+	<div class="col-md-8">
+		<h3><%= user.username %>'s campgrounds:</h3>
+		<ul>
+		<% campgrounds.forEach(function(campground) { %>
+			<li><a href="/campgrounds/<%= campground.slug %>"><%= campground.name %></a></li>
+		<% }); %>
+		</ul>
+	</div>
+</div>
+<%- include ("../partials/footer") %>
